@@ -1,0 +1,25 @@
+{
+  "name": "dice-rng-toolkit",
+  "version": "0.1.0",
+  "description": "A dependency-free toolkit for seedable random number generation and dice-notation rolling.",
+  "type": "module",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "scripts": {
+    "test": "vitest run"
+  },
+  "license": "MIT",
+  "author": "",
+  "keywords": [
+    "dice",
+    "rng",
+    "random",
+    "prng",
+    "dice-notation"
+  ],
+  "devDependencies": {
+    "vitest": "^2.0.0"
+  }
+}

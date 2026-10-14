@@ -1,0 +1,30 @@
+{
+  "name": "dungeon-run",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThJoker3/dungeon-run.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/ThJoker3/dungeon-run/issues"
+  },
+  "homepage": "https://github.com/ThJoker3/dungeon-run#readme",
+  "dependencies": {
+    "dice-rng-toolkit": "^0.1.0",
+    "readline-sync": "^1.4.10",
+    "rpg-fight-encounter": "github:MrNegnar/DnDModule"
+  },
+  "allowScripts": {
+    "github:MrNegnar/DnDModule#e60bed33e0f1e1614a71784b727263f94fc31565": true
+  }
+}
