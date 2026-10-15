@@ -1,11 +1,13 @@
+import { ConsoleUI } from './ConsoleUI.js';
+
 export class GameApplication {
+  #ui;
 
   constructor() {
-    this.#ui = null;
+    this.#ui = new ConsoleUI();
   }
 
   run() {
-    const ui = new ConsoleUI();
-    ui.showMessage('Welcome to Dungeon Run! \n What is thy name, adventurer?');
+    this.#ui.showMessage('Welcome to Dungeon Run! \nWhat is thy name, adventurer?');
   }
 }

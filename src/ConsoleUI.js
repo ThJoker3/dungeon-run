@@ -1,16 +1,12 @@
-import { readline-sync } from 'readline-sync';
+import readlinesync from 'readline-sync';
 
 export class ConsoleUI {
-  
-  constructor() {
-    this.#ui = this;
-  }
 
   showMessage(text) {
     console.log(text);
   }
 
   askForText(question) {
-    return readline-sync.question(question);
+    return readlinesync.question(question);
   }
 }
