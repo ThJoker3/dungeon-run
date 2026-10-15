@@ -8,6 +8,8 @@ export class GameApplication {
   }
 
   run() {
-    this.#ui.showMessage('Welcome to Dungeon Run! \nWhat is thy name, adventurer?');
+    this.#ui.showMessage('Welcome to Dungeon Run!');
+    const playerName = this.#ui.askForText('What is thy name, Adventurer? ');
+    this.#ui.showMessage(`Welcome, ${playerName}! Prepare for your adventure!`);
   }
 }
