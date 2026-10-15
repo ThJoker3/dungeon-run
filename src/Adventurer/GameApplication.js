@@ -1,4 +1,5 @@
-import { ConsoleUI } from './ConsoleUI.js';
+import { ConsoleUI } from '../ConsoleUI.js';
+import { Weapon } from './Weapon.js';
 
 export class GameApplication {
   #ui;
