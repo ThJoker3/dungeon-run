@@ -20,4 +20,8 @@ export class Weapon {
   getHealthPotions() {
     return this.#healthPotions; 
   }
+
+  getDescription() {
+    return `${this.#name} d${this.#attackPower} ${this.#healthPotions} health potions!`;
+  }
 }

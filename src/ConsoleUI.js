@@ -9,4 +9,8 @@ export class ConsoleUI {
   askForText(question) {
     return readlinesync.question(question);
   }
+
+  askToChoose(options, question) {
+    return readlinesync.keyInSelect(options, question, { cancel: false });
+  }
 }
