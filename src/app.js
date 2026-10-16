@@ -1,3 +1,3 @@
-import { GameApplication } from './Adventurer/GameApplication.js';
+import { GameApplication } from './GameApplication.js';
 
 new GameApplication().run();
