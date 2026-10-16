@@ -1,5 +1,6 @@
 import { ConsoleUI } from './ConsoleUI.js';
 import { Weapon } from './Adventurer/Weapon.js';
+import { Adventurer } from './Adventurer/Adventurer.js';
 
 export class GameApplication {
   #ui;
@@ -26,5 +27,7 @@ export class GameApplication {
     const playerName = this.#ui.askForText('What is thy name, Adventurer? ');
     const weapon = this.#chooseWeapon();
     this.#ui.showMessage(`Welcome, ${playerName}! You have chosen the ${weapon.getName()}. Prepare for your adventure!`);
+    const adventurer = new Adventurer(playerName, weapon);
+    this.#ui.showMessage(`${adventurer.getName()} wields a ${adventurer.getWeapon().getName()} with ${adventurer.getCurrentHitPoints()}/${adventurer.getMaxHitPoints()} HP.`);
   }
 }
