@@ -13,7 +13,8 @@ export class GameApplication {
     const weapons = [
       new Weapon('Dagger', 6, 3),
       new Weapon('Sword', 8, 2),
-      new Weapon('Axe', 10, 1)
+      new Weapon('Axe', 10, 1),
+      new Weapon('Staff', 8, 2)
     ]
     const descriptions = weapons.map(weapon => weapon.getDescription());
     const index = this.#ui.askToChoose(descriptions, 'Which weapon shall thou choose? ');
