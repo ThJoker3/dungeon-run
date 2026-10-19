@@ -1,5 +1,5 @@
 export class TreasureRoom {
-  enter(adventurer) {
-    console.log(`You found a treasure! ${adventurer.getName()} claims the loot.`);
+  enter(adventurer, ui) {
+    ui.showMessage(`You found a treasure! ${adventurer.getName()} claims the loot.`);
   }
 }
