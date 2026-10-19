@@ -1,6 +1,8 @@
 import { ConsoleUI } from './ConsoleUI.js';
 import { Weapon } from './Adventurer/Weapon.js';
 import { Adventurer } from './Adventurer/Adventurer.js';
+import { RandomGenerator } from 'dice-rng-toolkit';
+import { Dungeon } from './Dungeon/Dungeon.js';
 
 export class GameApplication {
   #ui;
@@ -22,8 +24,20 @@ export class GameApplication {
     return weapons[index];
   }
 
-  run() {
+  #askForSeed() {
     this.#ui.showMessage('Welcome to Dungeon Run!');
+    this.#ui.showMessage('Press Enter to use a random seed or enter a number to use as a seed. ');
+    const input = this.#ui.askForText('Enter a seed: ');
+    if (input === '') {
+      return Date.now();
+    }
+    return Number(input);
+  }
+
+  run() {
+    const seed = this.#askForSeed();
+    const rng = new RandomGenerator(seed)
+    const dungeon = new Dungeon(rng);
     const playerName = this.#ui.askForText('What is thy name, Adventurer? ');
     const weapon = this.#chooseWeapon();
     this.#ui.showMessage(`Welcome, ${playerName}! You have chosen the ${weapon.getName()}. Prepare for your adventure!`);
