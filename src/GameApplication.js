@@ -34,6 +34,13 @@ export class GameApplication {
     return Number(input);
   }
 
+  #createRoom(type) {
+    if (type === 'monster') return new MonsterRoom();
+    if (type === 'campfire') return new CampfireRoom();
+    if (type === 'treasure') return new TreasureRoom();
+    if (type === 'boss') return new BossRoom();
+  }
+
   run() {
     const seed = this.#askForSeed();
     const rng = new RandomGenerator(seed)
@@ -43,5 +50,8 @@ export class GameApplication {
     this.#ui.showMessage(`Welcome, ${playerName}! You have chosen the ${weapon.getName()}. Prepare for your adventure!`);
     const adventurer = new Adventurer(playerName, weapon);
     this.#ui.showMessage(`${adventurer.getName()} wields a ${adventurer.getWeapon().getName()} with ${adventurer.getCurrentHitPoints()}/${adventurer.getMaxHitPoints()} HP.`);
+    for (const room of dungeon.getRooms()) {
+      room.enter(adventurer, this.#ui);
+    }
   }
 }
