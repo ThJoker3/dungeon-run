@@ -27,11 +27,17 @@ export class GameApplication {
   #askForSeed() {
     this.#ui.showMessage('Welcome to Dungeon Run!');
     this.#ui.showMessage('Press Enter to use a random seed or enter a number to use as a seed. ');
-    const input = this.#ui.askForText('Enter a seed: ');
-    if (input === '') {
-      return Date.now();
+    while (true) {
+      const input = this.#ui.askForText('Enter a seed: ');
+      if (input === '') {
+        return Date.now();
+      }
+      const seed = Number(input);
+      if (Number.isInteger(seed)) {
+        return seed
+      }
+      this.#ui.showMessage('The seed must be a whole number. Try again')
     }
-    return Number(input);
   }
 
   #showRoomMenu(adventurer) {
