@@ -45,6 +45,14 @@ export class GameApplication {
     this.#ui.showMessage(`${adventurer.getName()} wields a ${adventurer.getWeapon().getName()} with ${adventurer.getCurrentHitPoints()}/${adventurer.getMaxHitPoints()} HP.`);
     for (const room of dungeon.getRooms()) {
       room.enter(adventurer, this.#ui);
+      if (!adventurer.getIsAlive()) {
+        break
+      }
+    }
+    if (adventurer.getIsAlive()) {
+      this.#ui.showMessage('Victory! You defeated the boss!')
+    } else {
+      this.#ui.showMessage(`${adventurer.getName()} has fallen...`)
     }
   }
 }
