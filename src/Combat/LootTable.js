@@ -14,9 +14,9 @@ export class LootTable {
   }
 
   rollItem() {
-    if (!this.#rng.nextBoolean(0.3)) {
+    if (!this.#rng.nextBoolean(0.5)) {
       return null
     }
-    return this.#randomizer.pickWeighted(['Rusty Key', 'Silver Ring', 'Dragon Scale'], [70, 25, 5], this.#rng)
+    return this.#randomizer.pickWeighted(['Rusty Key', 'Silver Ring', 'Health potion', 'Dragon Scale'], [60, 20, 15, 5], this.#rng)
   }
 }

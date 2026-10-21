@@ -1,4 +1,4 @@
-import { LootTable } from "../Combat/LootTable";
+import { LootTable } from "../Combat/LootTable.js";
 
 export class TreasureRoom {
   #rng

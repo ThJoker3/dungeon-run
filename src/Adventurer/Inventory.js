@@ -17,6 +17,10 @@ export class Inventory {
     this.#items.push(itemName)
   }
 
+  addHealthPotion() {
+    this.#healthPotions++
+  }
+
   hasHealthPotion() {
     return this.#healthPotions > 0
   }

@@ -28,7 +28,9 @@ export class MonsterRoom {
     adventurer.getInventory().addCoins(coins)
     ui.showMessage(`You found ${coins} coins!`)
     const item = lootTable.rollItem()
-    if (item) {
+    if (item === 'Health potion') {
+      adventurer.getInventory().addHealthPotion()
+    } else if (item) {
       adventurer.getInventory().addItem(item)
       ui.showMessage(`You found a ${item}!`)
     }
