@@ -21,14 +21,14 @@ export class Dungeon {
       const type = this.#randomizer.pickWeighted(['monster', 'campfire', 'treasure'], [60, 25, 15], this.#rng);
       rooms.push(this.#createRoom(type))
     }
-    rooms.push(new BossRoom());
+    rooms.push(new BossRoom(this.#rng));
     return rooms;
   }
 
   #createRoom(type) {
-    if (type === 'monster') return new MonsterRoom();
+    if (type === 'monster') return new MonsterRoom(this.#rng);
     if (type === 'campfire') return new CampfireRoom();
-    if (type === 'treasure') return new TreasureRoom();
+    if (type === 'treasure') return new TreasureRoom(this.#rng);
   }
   
   getRooms() {
