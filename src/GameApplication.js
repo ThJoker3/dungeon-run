@@ -34,6 +34,33 @@ export class GameApplication {
     return Number(input);
   }
 
+  #showRoomMenu(adventurer) {
+    const options = ['Continue', 'View inventory', 'Use health potion']
+    while (true) {
+      const choice = this.#ui.askToChoose(options, 'What next? ')
+      if (choice === 0) {
+        return
+      }
+      if (choice === 1) {
+        this.#ui.showMessage(adventurer.getInventory().getDescription())
+      }
+      if (choice === 2) {
+        this.#drinkHealthPotion(adventurer)
+      }
+    }
+  }
+
+  #drinkHealthPotion(adventurer) {
+    const inventory = adventurer.getInventory()
+    if (!inventory.hasHealthPotion()) {
+      this.#ui.showMessage('You have no health potions left.')
+      return
+    }
+    inventory.useHealthPotion()
+    adventurer.heal()
+    this.#ui.showMessage(`You drink a potion. HP: ${adventurer.getCurrentHitPoints()}/${adventurer.getMaxHitPoints()}`)
+  }
+
   run() {
     const seed = this.#askForSeed();
     const rng = new RandomGenerator(seed)
@@ -48,6 +75,7 @@ export class GameApplication {
       if (!adventurer.getIsAlive()) {
         break
       }
+      this.#showRoomMenu(adventurer)
     }
     if (adventurer.getIsAlive()) {
       this.#ui.showMessage('Victory! You defeated the boss!')
