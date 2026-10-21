@@ -16,6 +16,10 @@ export class Adventurer {
   getWeapon() {
     return this.#weapon;
   }
+  
+  getFighter() {
+    return this.#fighter
+  }
 
   getCurrentHitPoints() {
     return this.#fighter.getCurrentHitPoints();
