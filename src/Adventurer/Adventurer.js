@@ -16,7 +16,7 @@ export class Adventurer {
   getWeapon() {
     return this.#weapon;
   }
-  
+
   getFighter() {
     return this.#fighter
   }
@@ -27,6 +27,10 @@ export class Adventurer {
 
   getMaxHitPoints() {
     return this.#fighter.getMaxHitPoints();
+  }
+
+  heal() {
+    this.#fighter.heal(this.#fighter)
   }
 
   getIsAlive() {

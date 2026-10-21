@@ -1,5 +1,7 @@
 export class CampfireRoom {
   enter(adventurer, ui) {
-    ui.showMessage(`You approach a warm campfire! ${adventurer.getName()} rests and recovers some health.`);
+    const hpBefore = adventurer.getCurrentHitPoints()
+    adventurer.heal()
+    ui.showMessage(`You rest by the campfire! HP: ${hpBefore} => ${adventurer.getCurrentHitPoints()}/${adventurer.getMaxHitPoints()}`);
   }
 }
