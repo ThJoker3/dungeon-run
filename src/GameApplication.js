@@ -4,6 +4,10 @@ import { Adventurer } from './Adventurer/Adventurer.js';
 import { RandomGenerator } from 'dice-rng-toolkit';
 import { Dungeon } from './Dungeon/Dungeon.js';
 
+/**
+ * Runs the game: sets up a new adventure, walks through the dungeon
+ * and lets the player play again without restarting the program.
+ */
 export class GameApplication {
   #ui;
 
@@ -11,7 +15,7 @@ export class GameApplication {
     this.#ui = new ConsoleUI();
   }
 
-  
+
   #chooseWeapon() {
     const weapons = [
       new Weapon('Dagger', 6, 3),
@@ -24,6 +28,11 @@ export class GameApplication {
     return weapons[index];
   }
 
+  /**
+   * Asks for a seed until the player enters a whole number or leaves it empty.
+   *
+   * @returns {number} The chosen seed, or a random one if the input was empty.
+   */
   #askForSeed() {
     this.#ui.showMessage('Welcome to Dungeon Run!');
     this.#ui.showMessage('Press Enter to use a random seed or enter a number to use as a seed. ');
@@ -40,6 +49,11 @@ export class GameApplication {
     }
   }
 
+  /**
+   * Shows the menu between rooms until the player chooses to continue.
+   *
+   * @param {Adventurer} adventurer - The player's character.
+   */
   #showRoomMenu(adventurer) {
     const options = ['Continue', 'View inventory', 'Use health potion']
     while (true) {
@@ -56,6 +70,11 @@ export class GameApplication {
     }
   }
 
+  /**
+   * Uses a potion and heals, unless there are no potions or HP is already full.
+   *
+   * @param {Adventurer} adventurer - The player's character.
+   */
   #drinkHealthPotion(adventurer) {
     const inventory = adventurer.getInventory()
     if (!inventory.hasHealthPotion()) {
@@ -87,7 +106,9 @@ export class GameApplication {
       if (!adventurer.getIsAlive()) {
         break
       }
-      this.#showRoomMenu(adventurer)
+      if (roomsVisited < dungeon.getRooms().length) {
+        this.#showRoomMenu(adventurer)
+      }
     }
     this.#showSummary(adventurer, roomsVisited, seed)
   }
@@ -101,6 +122,9 @@ export class GameApplication {
     this.#ui.showMessage(`Seed: ${seed}`)
   }
 
+  /**
+   * Starts the game and keeps starting new games until the player chooses to quit.
+   */
   run() {
     do {
       this.#playGame()

@@ -3,11 +3,18 @@ import { CampfireRoom } from './CampfireRoom.js';
 import { MonsterRoom } from './MonsterRoom.js';
 import { TreasureRoom } from './TreasureRoom.js';
 
+/**
+ * A dungeon of 10 rooms. The first 9 are picked at random with weights, the last one is the boss.
+ * The same seed always gives the same dungeon.
+ */
 export class Dungeon {
   #rng;
   #rooms;
   #randomizer;
 
+  /**
+   * @param {RandomGenerator} rng - The seeded generator that decides which rooms are created.
+   */
   constructor(rng) {
     this.#randomizer = new Randomizer();
     this.#rng = rng;
@@ -29,7 +36,10 @@ export class Dungeon {
     if (type === 'campfire') return new CampfireRoom();
     if (type === 'treasure') return new TreasureRoom(this.#rng);
   }
-  
+
+  /**
+   * @returns {Array<MonsterRoom|CampfireRoom|TreasureRoom>} The rooms in the order they are visited.
+   */
   getRooms() {
     return this.#rooms;
   }
