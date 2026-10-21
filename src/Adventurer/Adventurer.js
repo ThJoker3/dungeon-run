@@ -1,12 +1,15 @@
 import { Player } from 'rpg-fight-encounter';
+import { Inventory } from './Inventory.js';
 
 export class Adventurer {
   #weapon;
   #fighter;
+  #inventory
 
   constructor(name, weapon) {
     this.#weapon = weapon;
     this.#fighter = new Player(name, weapon.getAttackPower());
+    this.#inventory = new Inventory(weapon.getHealthPotions())
   }
 
   getName() {
@@ -19,6 +22,10 @@ export class Adventurer {
 
   getFighter() {
     return this.#fighter
+  }
+
+  getInventory() {
+    return this.#inventory
   }
 
   getCurrentHitPoints() {
