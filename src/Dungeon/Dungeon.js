@@ -1,4 +1,8 @@
 import { Randomizer } from 'dice-rng-toolkit';
+import { BossRoom } from './BossRoom.js';
+import { CampfireRoom } from './CampfireRoom.js';
+import { MonsterRoom } from './MonsterRoom.js';
+import { TreasureRoom } from './TreasureRoom.js';
 
 export class Dungeon {
   #rng;
@@ -14,12 +18,19 @@ export class Dungeon {
   #createRooms() {
     const rooms = [];
     for (let i = 0; i < 9; i++) {
-      rooms.push(this.#randomizer.pickWeighted(['monster', 'campfire', 'treasure'], [60, 25, 15], this.#rng));
+      const type = this.#randomizer.pickWeighted(['monster', 'campfire', 'treasure'], [60, 25, 15], this.#rng);
+      rooms.push(this.#createRoom(type))
     }
-    rooms.push('boss');
+    rooms.push(new BossRoom());
     return rooms;
   }
 
+  #createRoom(type) {
+    if (type === 'monster') return new MonsterRoom();
+    if (type === 'campfire') return new CampfireRoom();
+    if (type === 'treasure') return new TreasureRoom();
+  }
+  
   getRooms() {
     return this.#rooms;
   }

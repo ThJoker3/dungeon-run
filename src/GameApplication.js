@@ -34,13 +34,6 @@ export class GameApplication {
     return Number(input);
   }
 
-  #createRoom(type) {
-    if (type === 'monster') return new MonsterRoom();
-    if (type === 'campfire') return new CampfireRoom();
-    if (type === 'treasure') return new TreasureRoom();
-    if (type === 'boss') return new BossRoom();
-  }
-
   run() {
     const seed = this.#askForSeed();
     const rng = new RandomGenerator(seed)
