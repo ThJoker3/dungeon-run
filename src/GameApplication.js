@@ -56,6 +56,10 @@ export class GameApplication {
       this.#ui.showMessage('You have no health potions left.')
       return
     }
+    if (adventurer.getCurrentHitPoints() === adventurer.getMaxHitPoints()) {
+      this.#ui.showMessage('You are already at full health.')
+      return
+    }
     inventory.useHealthPotion()
     adventurer.heal()
     this.#ui.showMessage(`You drink a potion. HP: ${adventurer.getCurrentHitPoints()}/${adventurer.getMaxHitPoints()}`)
