@@ -61,7 +61,7 @@ export class GameApplication {
     this.#ui.showMessage(`You drink a potion. HP: ${adventurer.getCurrentHitPoints()}/${adventurer.getMaxHitPoints()}`)
   }
 
-  run() {
+  #playGame() {
     const seed = this.#askForSeed();
     const rng = new RandomGenerator(seed)
     const dungeon = new Dungeon(rng);
@@ -70,17 +70,31 @@ export class GameApplication {
     this.#ui.showMessage(`Welcome, ${playerName}! You have chosen the ${weapon.getName()}. Prepare for your adventure!`);
     const adventurer = new Adventurer(playerName, weapon);
     this.#ui.showMessage(`${adventurer.getName()} wields a ${adventurer.getWeapon().getName()} with ${adventurer.getCurrentHitPoints()}/${adventurer.getMaxHitPoints()} HP.`);
+    let roomsVisited = 0
     for (const room of dungeon.getRooms()) {
-      room.enter(adventurer, this.#ui);
+      roomsVisited++
+      room.enter(adventurer, this.#ui)
       if (!adventurer.getIsAlive()) {
         break
       }
       this.#showRoomMenu(adventurer)
     }
-    if (adventurer.getIsAlive()) {
-      this.#ui.showMessage('Victory! You defeated the boss!')
-    } else {
-      this.#ui.showMessage(`${adventurer.getName()} has fallen...`)
-    }
+    this.#showSummary(adventurer, roomsVisited, seed)
+  }
+
+  #showSummary(adventurer, roomsVisited, seed) {
+    const result = adventurer.getIsAlive() ? 'Victory! You defeated the boss!' : `${adventurer.getName()} has fallen...`
+    this.#ui.showMessage('--- Run Summary ---')
+    this.#ui.showMessage(result)
+    this.#ui.showMessage(`Rooms visited: ${roomsVisited}/10`)
+    this.#ui.showMessage(adventurer.getInventory().getDescription())
+    this.#ui.showMessage(`Seed: ${seed}`)
+  }
+
+  run() {
+    do {
+      this.#playGame()
+    } while (this.#ui.askYesNo('Play again? '))
+    this.#ui.showMessage('Farewell, Adventurer')
   }
 }

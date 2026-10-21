@@ -1,3 +1,5 @@
+import { LootTable } from "../Combat/LootTable";
+
 export class TreasureRoom {
   #rng
 
@@ -6,6 +8,8 @@ export class TreasureRoom {
   }
   
   enter(adventurer, ui) {
-    ui.showMessage(`You found a treasure! ${adventurer.getName()} claims the loot.`);
+    const coins = new LootTable(this.#rng).rollCoins('3d6')
+    adventurer.getInventory().addCoins(coins)
+    ui.showMessage(`You found a treasure! ${adventurer.getName()} got ${coins} coins.`);
   }
 }

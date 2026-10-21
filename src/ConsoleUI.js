@@ -13,4 +13,8 @@ export class ConsoleUI {
   askToChoose(options, question) {
     return readlinesync.keyInSelect(options, question, { cancel: false });
   }
+
+  askYesNo(question) {
+    return readlinesync.keyInYN(question)
+  }
 }
