@@ -24,7 +24,7 @@ Save a script like this as `test.mjs` in the project root and run it with `node 
 
 The hardest part to test was combat. The fight module uses `Math.random()`, so the same seed does not give the same fight, and HP is rolled inside the module. Tests that depend on a fight (loot, dying, winning) therefore describe the expected *behaviour* rather than exact numbers, and some had to be repeated until the wanted situation came up (for example winning against the dragon).
 
-Tested with Node.js 24.19.0 and dice-rng-toolkit 0.1.0.
+Tested with Node.js 24.19.0 and dice-rng-toolkit 1.0.0.
 
 ## Test Results
 

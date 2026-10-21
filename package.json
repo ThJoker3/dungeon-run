@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/ThJoker3/dungeon-run#readme",
   "dependencies": {
-    "dice-rng-toolkit": "^0.1.0",
+    "dice-rng-toolkit": "^1.0.0",
     "readline-sync": "^1.4.10",
     "rpg-fight-encounter": "github:MrNegnar/DnDModule"
   },
