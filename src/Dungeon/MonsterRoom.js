@@ -3,14 +3,20 @@ import { LootTable } from "../Combat/LootTable.js";
 
 export class MonsterRoom {
   #rng
+  #enemyName
+  #enemyAttackPower
+  #coinDice
 
-  constructor(rng) {
+  constructor(rng, enemyName, enemyAttackPower, coinDice) {
     this.#rng = rng
+    this.#enemyName = enemyName
+    this.#enemyAttackPower = enemyAttackPower
+    this.#coinDice = coinDice
   }
   
   enter(adventurer, ui) {
-    ui.showMessage('A wild monster appears!') 
-    const won = new Combat(ui).fight(adventurer, 'Goblin', 4);
+    ui.showMessage(`A ${this.#enemyName} appears!`) 
+    const won = new Combat(ui).fight(adventurer, this.#enemyName, this.#enemyAttackPower);
     if (won) {
       this.#collectLoot(adventurer, ui)
     }
@@ -18,7 +24,7 @@ export class MonsterRoom {
 
   #collectLoot(adventurer, ui) {
     const lootTable = new LootTable(this.#rng)
-    const coins = lootTable.rollCoins('2d6')
+    const coins = lootTable.rollCoins(this.#coinDice)
     adventurer.getInventory().addCoins(coins)
     ui.showMessage(`You found ${coins} coins!`)
     const item = lootTable.rollItem()
